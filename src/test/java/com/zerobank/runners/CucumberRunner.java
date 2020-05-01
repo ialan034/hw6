@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com/zerobank/stepDefinitions",
-        tags = "",
+        tags = "@login",
         dryRun = false,
         strict = true,
         plugin = {
