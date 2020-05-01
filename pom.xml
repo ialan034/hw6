@@ -23,6 +23,50 @@
                     <target>14</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <parallel>classes</parallel>
+                    <threadCount>2</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <includes>
+                        <include>**/*Runner.java</include>
+                    </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
+                    <!--                    <parallel>methods</parallel>-->
+                    <!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+                    <!--                    <includes>-->
+                    <!--                        <include>**/*Runner.java</include>-->
+                    <!--                    </includes>-->
+                    <!--                    <testFailureIgnore>true</testFailureIgnore>-->
+                    <!--                    &lt;!&ndash;                    <rerunFailingTestsCount>1</rerunFailingTestsCount>&ndash;&gt;-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Cucumber HTML Reports</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <param>**/cucumber*.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -73,7 +117,4 @@
             <version>2.13.2</version>
         </dependency>
     </dependencies>
-
-
-
 </project>

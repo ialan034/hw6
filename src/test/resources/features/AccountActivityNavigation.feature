@@ -1,3 +1,4 @@
+@account_navigation
 Feature: Navigating to specific accounts in Accounts Activity
 
   Background: Navigate to Account Summary Page
@@ -5,7 +6,6 @@ Feature: Navigating to specific accounts in Accounts Activity
     Then user navigates to the login page
     Then user logs in with default credentials
 
-  @account_navigation
   Scenario Outline: <Account_Type> account redirect
     When the user clicks "<Account_Type>" link on the Account Summary Page
     Then verifies that "Account Activity" page is displayed

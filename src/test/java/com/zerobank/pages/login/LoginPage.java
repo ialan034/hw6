@@ -21,6 +21,8 @@ public class LoginPage extends BasePage {
 
     public void login(String username, String password){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user_login")));
+        wait.until(ExpectedConditions.elementToBeClickable(userNameField));
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
         userNameField.sendKeys(username);
         passwordField.sendKeys(password);
         wait.until(ExpectedConditions.attributeContains(userNameField,"value",username));
@@ -29,12 +31,34 @@ public class LoginPage extends BasePage {
     }
 
     public void defaultLogin(){
-        wait.until(ExpectedConditions.elementToBeClickable(userNameField));
-        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        userNameField.sendKeys(ConfigurationReader.getProperty("username"));
-        wait.until(ExpectedConditions.attributeContains(userNameField,"value",ConfigurationReader.getProperty("username")));
-        passwordField.sendKeys(ConfigurationReader.getProperty("password"));
-        wait.until(ExpectedConditions.attributeContains(passwordField,"value",ConfigurationReader.getProperty("password")));
+        int attempts=0;
+        boolean exceptionThrown=false;
+        while(attempts<3) {
+            exceptionThrown=false;
+            try {
+                userNameField.clear();
+                passwordField.clear();
+                wait.until(ExpectedConditions.elementToBeClickable(userNameField));
+                wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+                userNameField.sendKeys(ConfigurationReader.getProperty("username"));
+//                System.out.println(userNameField.getAttribute("value"));
+                if(!userNameField.getAttribute("value").equals(ConfigurationReader.getProperty("username")))
+                    throw new RuntimeException();
+                passwordField.sendKeys(ConfigurationReader.getProperty("password"));
+//                System.out.println(passwordField.getAttribute("value"));
+                if(!passwordField.getAttribute("value").equals(ConfigurationReader.getProperty("password")))
+                    throw new RuntimeException();
+            }catch (Exception e){
+                System.out.println("Trying to login again");
+                exceptionThrown=true;
+            }
+            if(!exceptionThrown)
+                break;
+            else
+                attempts++;
+        }
+        if(exceptionThrown)
+            throw new RuntimeException("Login credentials are not correct");
         signin.click();
     }
 

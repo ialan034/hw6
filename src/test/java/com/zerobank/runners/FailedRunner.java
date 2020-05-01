@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
         features = "@target/rerun.txt",
         glue = "com/zerobank/stepDefinitions",
         plugin= {
-                "html:target/failed-default-cucumber-reports",
-                "json:target/failed_report.json"
+                "html:target/failed-default-reports",
+                "json:target/cucumber_failed_report.json"
         }
 )
 public class FailedRunner {
