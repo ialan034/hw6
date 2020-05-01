@@ -17,11 +17,10 @@ Feature: Statements and Documents details
       | 2012 | 1     |
 
   @statements_documents
-  Scenario Outline: Download statements
+  Scenario Outline: Download <statement>
     And the user selects the Recent Statements Year <year>
     When the user clicks on statement "<statement>"
-#    Then the downloaded file name should contain "<name>"
-#    And the file type should be pdf
+    Then the downloaded file name should contain "<name>" and the file type should be pdf
     Examples:
       | year | statement               | name     |
       | 2009 | Statement 31/11/09(57K) | 31-11-09 |

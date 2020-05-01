@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
     protected WebDriver driver= Driver.getDriver();
-    protected WebDriverWait wait=new WebDriverWait(driver,15);
+    protected WebDriverWait wait=new WebDriverWait(driver,5);
     @FindBy(id = "signin_button")
     WebElement signinButton;
     @FindBy(xpath = "//li[@class='active']//a")
@@ -30,9 +30,8 @@ public abstract class BasePage {
 
     public void navigateTo(String pageTitle){
         String pageXpath="//a[text()='"+pageTitle+"']";
-        WebElement pageLink=driver.findElement(By.xpath(pageXpath));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(pageXpath)));
-        wait.until(ExpectedConditions.elementToBeClickable(pageLink)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(pageXpath))).click();
     }
     public void navigateToTab(String tabName){
         By xpath= By.xpath("//a[text()='"+tabName+"']");

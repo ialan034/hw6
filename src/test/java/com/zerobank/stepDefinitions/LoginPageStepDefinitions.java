@@ -39,7 +39,7 @@ public class LoginPageStepDefinitions {
 
     @Then("user logs in with default credentials")
     public void userLogsInWithDefaultCredentials() {
-        System.out.println("User logs in to the application by default credentials");
         loginPage.defaultLogin();
+        System.out.println("User logs in to the application by default credentials");
     }
 }

@@ -70,11 +70,11 @@ public class AccountActivityPage extends BasePage {
         return BrowserUtilities.getTextFromWebElements(tableHeaders);
     }
 
-
-
     public List<String> getAllDates(){
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='filtered_transactions_for_account']//td[1]")));
+       // wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='filtered_transactions_for_account']//td[1]")));
 //        List<WebElement> allDates=driver.findElements(By.xpath("//div[@id='filtered_transactions_for_account']//td[1]"));
+        wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfAllElements(allDates));
+
         return BrowserUtilities.getInnerHTMLFromWebElements(allDates);
     }
 

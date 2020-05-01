@@ -9,10 +9,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Design pattern - is a general reusable solution to a commonly occurring problem with a given context in software design.
@@ -42,24 +45,22 @@ public class Driver {
             String browser = browserParamFromEnv==null?ConfigurationReader.getProperty("browser").toLowerCase():browserParamFromEnv;
             switch (browser) {
                 case "chrome":
+                    WebDriverManager.chromedriver().setup();
                     System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
                     // Headless mode make executions faster it does everything except file uploading
                     //WebDriverManager.chromedriver().version("79.0").setup();
                     //System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
-
-                    WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver());
-
                     break;
                 case "chromeheadless":
                     System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
                     //to run chrome without interface
                     System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
                     WebDriverManager.chromedriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    options.setHeadless(true);      //to run browser without interface
+                    ChromeOptions optionsHeadless = new ChromeOptions();
+                    optionsHeadless.setHeadless(true);      //to run browser without interface
                     //      options.addArguments("--start-maximized");
-                    driverPool.set(new ChromeDriver(options));
+                    driverPool.set(new ChromeDriver(optionsHeadless));
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class LoginPage extends BasePage {
 
     @FindBy(id = "user_login")
-    WebElement loginField;
+    WebElement userNameField;
     @FindBy(id = "user_password")
     WebElement passwordField;
     @FindBy(name = "submit")
@@ -19,20 +19,23 @@ public class LoginPage extends BasePage {
     @FindBy(className = "alert-error")
     WebElement warningMessage;
 
-    public AccountSummaryPage login(String username, String password){
+    public void login(String username, String password){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user_login")));
-        loginField.sendKeys(username);
+        userNameField.sendKeys(username);
         passwordField.sendKeys(password);
+        wait.until(ExpectedConditions.attributeContains(userNameField,"value",username));
+        wait.until(ExpectedConditions.attributeContains(passwordField,"value",password));
         signin.click();
-        return  new AccountSummaryPage();
     }
 
-    public AccountSummaryPage defaultLogin(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user_login")));
-        loginField.sendKeys(ConfigurationReader.getProperty("username"));
+    public void defaultLogin(){
+        wait.until(ExpectedConditions.elementToBeClickable(userNameField));
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        userNameField.sendKeys(ConfigurationReader.getProperty("username"));
+        wait.until(ExpectedConditions.attributeContains(userNameField,"value",ConfigurationReader.getProperty("username")));
         passwordField.sendKeys(ConfigurationReader.getProperty("password"));
+        wait.until(ExpectedConditions.attributeContains(passwordField,"value",ConfigurationReader.getProperty("password")));
         signin.click();
-        return new AccountSummaryPage();
     }
 
     public String getWarningMessage(){
