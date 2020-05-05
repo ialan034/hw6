@@ -31,7 +31,6 @@ public class StatementsStepDefinitions {
 
     @Then("the downloaded file name should contain {string} and the file type should be pdf")
     public void theDownloadedFileNameShouldContainAndTheFileTypeShouldBePdf(String name) {
-        System.out.println("User at verify pdf step");
         String expectedFileName = statementsPage.getFullFileName(name);
         String filePath = "";
         if (System.getProperty("os.name").toLowerCase().contains("mac"))

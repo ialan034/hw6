@@ -36,7 +36,7 @@ public class StatementsPage extends BasePage {
             filePath = System.getProperty("user.home") + "/Downloads/" + getDownloadedFileName(link);
         else
             filePath = System.getProperty("user.home") + "\\Downloads\\" + getDownloadedFileName(link);
-        System.out.println("Click Statement: filePath = " + filePath);
+//        System.out.println("Click Statement: filePath = " + filePath);
         File temp=new File(filePath);
         int timeout=0;
         while(!temp.exists() && timeout<10){
