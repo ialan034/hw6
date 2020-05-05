@@ -36,7 +36,7 @@ public class StatementsPage extends BasePage {
             filePath = System.getProperty("user.home") + "/Downloads/" + getDownloadedFileName(link);
         else
             filePath = System.getProperty("user.home") + "\\Downloads\\" + getDownloadedFileName(link);
-
+        System.out.println("Click Statement: filePath = " + filePath);
         File temp=new File(filePath);
         int timeout=0;
         while(!temp.exists() && timeout<10){
@@ -44,7 +44,7 @@ public class StatementsPage extends BasePage {
             timeout++;
         }
         if(timeout==10)
-            throw new RuntimeException("File is not downloaded");
+            throw new RuntimeException("Click Statement step: File is not downloaded");
     }
 
     public String getFullFileName(String name){
