@@ -31,8 +31,11 @@ public class StatementsPage extends BasePage {
         String xpath="//a[text()='"+statement+"']";
         WebElement link=driver.findElement(By.xpath(xpath));
         wait.until(ExpectedConditions.elementToBeClickable(link)).click();
-        String filePath=System.getProperty("user.home") + "/Downloads/"+getDownloadedFileName(link);
-        //System.out.println("filePath = " + filePath);
+        String filePath = "";
+        if (System.getProperty("os.name").toLowerCase().contains("mac"))
+            filePath = System.getProperty("user.home") + "/Downloads/" + getDownloadedFileName(link);
+        else
+            filePath = System.getProperty("user.home") + "\\Downloads\\" + getDownloadedFileName(link);
 
         File temp=new File(filePath);
         int timeout=0;
