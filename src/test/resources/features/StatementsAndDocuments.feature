@@ -24,6 +24,6 @@ Feature: Statements and Documents details
     Examples:
       | year | statement               | name     |
       | 2009 | Statement 31/11/09(57K) | 31-11-09 |
-      | 2010 | Statement 01/12/10(57K) | 01-12-10 |
-      | 2011 | Statement 05/12/11(57K) | 05-12-11 |
-      | 2012 | Statement 01/10/12(57K) | 01-10-12 |
+#      | 2010 | Statement 01/12/10(57K) | 01-12-10 |
+#      | 2011 | Statement 05/12/11(57K) | 05-12-11 |
+#      | 2012 | Statement 01/10/12(57K) | 01-10-12 |
