@@ -1,8 +1,8 @@
 package com.zerobank.stepDefinitions;
 
 import com.zerobank.pages.accountactivity.AccountActivityPage;
-import com.zerobank.utilities.BrowserUtilities;
 import com.zerobank.utilities.DateTimeUtilities;
+import com.zerobank.utilities.StepData;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.But;
 import io.cucumber.java.en.Then;
@@ -19,10 +19,16 @@ public class AccountActivityPageStepDefinitions {
     private List<LocalDate> localDateList;
     private List<String> ONLINE_descriptions ;
     private List<String> online_descriptions ;
+    private StepData stepData;
+
+    public AccountActivityPageStepDefinitions(StepData stepData) {
+        this.stepData = stepData;
+    }
 
     @Then("user navigates to the {string} page")
     public void userNavigatesToThePage(String page) {
         System.out.println("User navigates to the " + page + " page");
+        System.out.println("stepData = " + stepData.data);
         accountActivityPage.navigateTo(page);
     }
 

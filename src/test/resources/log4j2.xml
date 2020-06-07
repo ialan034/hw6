@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="logPath"> target/logs</Property>
+    </Properties>
+
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
+        <RollingFile name="fileLogger" fileName="${logPath}/zerobank_execution.log" filePattern="${logPath}/zerobank_execution.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.zerobank.utilities.MyLogger" level="trace">
+        <Logger name="zerobank" level="trace">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Root level="error">
-            <AppenderRef ref="Console"/>
+        <Root level="trace">
+<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="fileLogger"/>
         </Root>
     </Loggers>
+
 </Configuration>
 

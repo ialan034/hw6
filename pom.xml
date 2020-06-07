@@ -28,21 +28,22 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
-                    <parallel>classes</parallel>
-                    <threadCount>2</threadCount>
-                    <perCoreThreadCount>false</perCoreThreadCount>
-                    <includes>
-                        <include>**/*Runner.java</include>
-                    </includes>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
-                    <!--                    <parallel>methods</parallel>-->
-                    <!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+                    <!--                    <parallel>classes</parallel>-->
+                    <!--                    <threadCount>4</threadCount>-->
+                    <!--                    <perCoreThreadCount>false</perCoreThreadCount>-->
                     <!--                    <includes>-->
                     <!--                        <include>**/*Runner.java</include>-->
                     <!--                    </includes>-->
                     <!--                    <testFailureIgnore>true</testFailureIgnore>-->
-                    <!--                    &lt;!&ndash;                    <rerunFailingTestsCount>1</rerunFailingTestsCount>&ndash;&gt;-->
+                    <!--                     run all feature files in parallel-->
+                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
+                    <parallel>methods</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <includes>
+                        <include>**/*Runner.java</include>
+                    </includes>
+<!--                    <testFailureIgnore>true</testFailureIgnore>-->
+                    <!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -116,5 +117,14 @@
             <artifactId>log4j-core</artifactId>
             <version>2.13.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 </project>
