@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -56,7 +57,15 @@ public class Driver {
                     // Headless mode make executions faster it does everything except file uploading
                     //WebDriverManager.chromedriver().version("79.0").setup();
                     //System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
-                    driverPool.set(new ChromeDriver());
+                    DesiredCapabilities cap=DesiredCapabilities.chrome();
+                    cap.acceptInsecureCerts();
+                    cap.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+                    cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+                    ChromeOptions options=new ChromeOptions();
+                    options.merge(cap);
+
+                    driverPool.set(new ChromeDriver(options));
                     break;
                 case "chromeheadless":
                     System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
